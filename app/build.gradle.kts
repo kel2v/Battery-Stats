@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.devtools.ksp)
     alias(libs.plugins.google.dagger.hilt.android)
@@ -111,6 +110,7 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.junit.vintage.engine)
     testImplementation(libs.junit.jupiter)
+    testRuntimeOnly(libs.junit.platform.launcher)
 
     // test: Kotlin-coroutines
     testImplementation(libs.kotlinx.coroutines.test)

@@ -1,9 +1,9 @@
 package com.bytemanager.stats.utils
 
 import android.os.BatteryManager
+import org.junit.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class BatteryStateRepositoryTests {
