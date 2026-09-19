@@ -31,4 +31,16 @@
     <string name="battery_status_not_charging">Not charging</string>
     <string name="battery_status_unknown">Unknown</string>
     <string name="not_available">Not available</string>
+    <string name="selected_graph">Selected graph</string>
+    <string name="live_graph">Live graph</string>
+    <string name="day_graph">Day graph</string>
+    <string name="week_graph">Week graph</string>
+    <string name="month_graph">Month graph</string>
+    <string name="year_graph">Year graph</string>
+    <string name="confirm">Confirm</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="date_selected">Date selected</string>
+    <string name="select_date">Select date</string>
+    <string name="no_data_found">No data found</string>
+    <string name="select_graph_type">Select graph type</string>
 </resources>

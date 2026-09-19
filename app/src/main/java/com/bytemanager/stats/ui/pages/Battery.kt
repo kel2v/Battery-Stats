@@ -51,5 +51,9 @@ fun Battery(batteryViewModel: BatteryViewModel = hiltViewModel(checkNotNull(Loca
         ) {
             Text(if(isLoggingEnabled) "Logging is ON" else "Logging is OFF")
         }
+
+        Spacer(Modifier.height(40.dp))
+
+        BatteryTempGraphScreen()
     }
 }

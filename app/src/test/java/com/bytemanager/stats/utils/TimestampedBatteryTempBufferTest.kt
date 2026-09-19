@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
+import java.time.LocalDate
 import java.time.ZoneId
 
 class TimestampedBatteryTempBufferTest {
@@ -40,12 +41,7 @@ class TimestampedBatteryTempBufferTest {
             return flow { emptyList<TimestampedBatteryTemp>() }
         }
 
-        override fun getAllByDate(
-            year: Int,
-            month: Int,
-            day: Int,
-            zoneId: ZoneId
-        ): Flow<List<TimestampedBatteryTemp>> {
+        override fun getAllByLocalDate(localDate: LocalDate): Flow<List<TimestampedBatteryTemp>> {
             return flow { emptyList<TimestampedBatteryTemp>() }
         }
     }
@@ -53,8 +49,8 @@ class TimestampedBatteryTempBufferTest {
 
     lateinit var buffer: TimestampedBatteryTempBuffer
     lateinit var mockDao: MockDao
-    val conflictingBufferInsertionList = DbFillData().conflictingBufferInsertionList
-    val expectedNonConflictingList = DbFillData().expectedNonConflictingList
+    val conflictingBufferInsertionList = DbFillData.conflictingBufferInsertionList
+    val expectedNonConflictingList = DbFillData.expectedNonConflictingList
 
     @Before
     fun setup() {
@@ -152,7 +148,7 @@ class TimestampedBatteryTempBufferTest {
     fun getBuffer___someInsertions___correctOutput() {
         assertBufferEmpty()
 
-        val inputList = DbFillData().jan1st1970List
+        val inputList = DbFillData.jan1st1970List
         insertToBuffer(inputList)
 
         val bufferAfterInsertion = runBlocking { buffer.getBuffer() }
@@ -184,7 +180,7 @@ class TimestampedBatteryTempBufferTest {
     fun clearBuffer___nonEmptyBuffer___emptyListOutput() {
         assertBufferEmpty()
 
-        setBufferNonEmptyAndValidate(DbFillData().jan1st1970List)
+        setBufferNonEmptyAndValidate(DbFillData.jan1st1970List)
 
         runBlocking { buffer.clearBuffer() }
 
@@ -211,7 +207,7 @@ class TimestampedBatteryTempBufferTest {
 
     @Test
     fun flushBuffer___nonEmptyBufferAndEmptyDb___emptyBufferAndNonEmptyDbAndNoException() {
-        val bufferBeforeFlushInsertionList = DbFillData().jan1st1970List
+        val bufferBeforeFlushInsertionList = DbFillData.jan1st1970List
 
         assertBufferEmpty()
         setBufferNonEmptyAndValidate(bufferBeforeFlushInsertionList)
@@ -230,7 +226,7 @@ class TimestampedBatteryTempBufferTest {
 
     @Test
     fun flushBuffer___emptyBufferAndNonEmptyDb___emptyBufferAndUnchangedDbAndNoException() {
-        val dbBeforeFlushInsertionList = DbFillData().jan2nd1970List
+        val dbBeforeFlushInsertionList = DbFillData.jan2nd1970List
 
         assertBufferEmpty()
         setDbNonEmptyAndValidate(dbBeforeFlushInsertionList)
@@ -249,8 +245,8 @@ class TimestampedBatteryTempBufferTest {
 
     @Test
     fun flushBuffer___nonEmptyBufferAndNonEmptyDb___emptyBufferAndCorrectDbData() {
-        val bufferBeforeFlushInsertionList = DbFillData().jan1st1970List
-        val dbBeforeFlushInsertionList = DbFillData().jan2nd1970List
+        val bufferBeforeFlushInsertionList = DbFillData.jan1st1970List
+        val dbBeforeFlushInsertionList = DbFillData.jan2nd1970List
 
 
         assertBufferEmpty()
@@ -277,7 +273,7 @@ class TimestampedBatteryTempBufferTest {
 
     @Test
     fun addItemToBuffer___emptyBufferAndNonConflictingInsertion___fullInsertionListAsBufferData() {
-        val bufferNonConflictingInsertionList = DbFillData().jan2nd1970List
+        val bufferNonConflictingInsertionList = DbFillData.jan2nd1970List
 
 
         assertBufferEmpty()
@@ -317,8 +313,8 @@ class TimestampedBatteryTempBufferTest {
 
     @Test
     fun addItemToBuffer___nonEmptyBufferAndNonConflictingInsertion___fullInsertionListItemsAppendedToBuffer() {
-        val bufferInsertionList = DbFillData().jan1st1970List
-        val bufferNonConflictingInsertionList = DbFillData().jan2nd1970List
+        val bufferInsertionList = DbFillData.jan1st1970List
+        val bufferNonConflictingInsertionList = DbFillData.jan2nd1970List
 
 
         assertBufferEmpty()
@@ -338,7 +334,7 @@ class TimestampedBatteryTempBufferTest {
 
     @Test
     fun addItemToBuffer___nonEmptyBufferAndConflictingInsertion___sameTimestampMergedIntoSingleValueListAppendedToDbData() {
-        val bufferInsertionList = DbFillData().jan1st1970List
+        val bufferInsertionList = DbFillData.jan1st1970List
         val bufferConflictingInsertList = conflictingBufferInsertionList
 
 

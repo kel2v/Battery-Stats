@@ -2,7 +2,7 @@ package com.bytemanager.stats.utils
 
 import android.os.BatteryManager
 
-class BatteryStateRepositoryUtils {
+object BatteryStateRepositoryUtils {
     fun getBatteryLevelPercentage(level: Int, scale: Int): Int {
         val percentage = if(level >= 0 && scale > 0  && level <= scale) {
             (level * 100) / scale

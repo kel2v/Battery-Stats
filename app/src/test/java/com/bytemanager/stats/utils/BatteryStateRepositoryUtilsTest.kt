@@ -64,7 +64,7 @@ class BatteryStateRepositoryTests {
     )
     fun getBatteryLevelPercentage_validInput_returnsCorrect(level: Int, scale: Int, expected: Int) {
         assertEquals(
-            BatteryStateRepositoryUtils().getBatteryLevelPercentage(level, scale),
+            BatteryStateRepositoryUtils.getBatteryLevelPercentage(level, scale),
             expected
         )
     }
@@ -110,7 +110,7 @@ class BatteryStateRepositoryTests {
     )
     fun getBatteryLevelPercentage_invalidInput_returnsError(level: Int, scale: Int, expected: Int) {
         assertEquals(
-            BatteryStateRepositoryUtils().getBatteryLevelPercentage(level, scale),
+            BatteryStateRepositoryUtils.getBatteryLevelPercentage(level, scale),
             expected
         )
     }
@@ -138,7 +138,7 @@ class BatteryStateRepositoryTests {
         "501, 50.1"
     )
     fun getTemperatureInCelsius_validInput_correctOutput(rawValue: Int, expected: Float) {
-        assertEquals(BatteryStateRepositoryUtils().getTemperatureInCelsius(rawValue), expected)
+        assertEquals(BatteryStateRepositoryUtils.getTemperatureInCelsius(rawValue), expected)
     }
 
     @ParameterizedTest(name = "rawValue={0} -> temp={1}°C")
@@ -146,7 +146,7 @@ class BatteryStateRepositoryTests {
         "-2147483648, -3.4028235E38"
     )
     fun getTemperatureInCelsius_invalidInput_returnError(rawValue: Int, expected: Float) {
-        assertEquals(BatteryStateRepositoryUtils().getTemperatureInCelsius(rawValue), expected)
+        assertEquals(BatteryStateRepositoryUtils.getTemperatureInCelsius(rawValue), expected)
     }
 
 
@@ -172,7 +172,7 @@ class BatteryStateRepositoryTests {
         "501, 0.501"
     )
     fun getVoltage_validInput_correctOutput(rawValue: Int, expected: Float) {
-        assertEquals(BatteryStateRepositoryUtils().getVoltage(rawValue), expected)
+        assertEquals(BatteryStateRepositoryUtils.getVoltage(rawValue), expected)
     }
 
     @ParameterizedTest(name = "rawValue={0} -> volts={1}V")
@@ -180,7 +180,7 @@ class BatteryStateRepositoryTests {
         "-2147483648, -3.4028235E38"
     )
     fun getVoltage_invalidInput_returnError(rawValue: Int, expected: Float) {
-        assertEquals(BatteryStateRepositoryUtils().getVoltage(rawValue), expected)
+        assertEquals(BatteryStateRepositoryUtils.getVoltage(rawValue), expected)
     }
 
 
@@ -195,12 +195,12 @@ class BatteryStateRepositoryTests {
         "Button, Button"
     )
     fun getTechnology_validInput_correctOutput(rawString: String?, expected: String) {
-        assertEquals(BatteryStateRepositoryUtils().getTechnology(rawString), expected)
+        assertEquals(BatteryStateRepositoryUtils.getTechnology(rawString), expected)
     }
 
     @Test
     fun getTechnology_invalidInput_returnError() {
-        assertEquals(BatteryStateRepositoryUtils().getTechnology(null), "Not available")
+        assertEquals(BatteryStateRepositoryUtils.getTechnology(null), "Not available")
     }
 
 
@@ -208,7 +208,7 @@ class BatteryStateRepositoryTests {
     @Test
     fun getHealth_batteryHealthCold_returnCold() {
         assertEquals(
-            BatteryStateRepositoryUtils().getHealth(BatteryManager.BATTERY_HEALTH_COLD),
+            BatteryStateRepositoryUtils.getHealth(BatteryManager.BATTERY_HEALTH_COLD),
             "Cold"
         )
     }
@@ -216,7 +216,7 @@ class BatteryStateRepositoryTests {
     @Test
     fun getHealth_batteryHealthDead_returnDead() {
         assertEquals(
-            BatteryStateRepositoryUtils().getHealth(BatteryManager.BATTERY_HEALTH_DEAD),
+            BatteryStateRepositoryUtils.getHealth(BatteryManager.BATTERY_HEALTH_DEAD),
             "Dead"
         )
     }
@@ -224,7 +224,7 @@ class BatteryStateRepositoryTests {
     @Test
     fun getHealth_batteryHealthGood_returnGood() {
         assertEquals(
-            BatteryStateRepositoryUtils().getHealth(BatteryManager.BATTERY_HEALTH_GOOD),
+            BatteryStateRepositoryUtils.getHealth(BatteryManager.BATTERY_HEALTH_GOOD),
             "Good"
         )
     }
@@ -232,7 +232,7 @@ class BatteryStateRepositoryTests {
     @Test
     fun getHealth_batteryHealthOverheat_returnOverheated() {
         assertEquals(
-            BatteryStateRepositoryUtils().getHealth(BatteryManager.BATTERY_HEALTH_OVERHEAT),
+            BatteryStateRepositoryUtils.getHealth(BatteryManager.BATTERY_HEALTH_OVERHEAT),
             "Overheated"
         )
     }
@@ -240,7 +240,7 @@ class BatteryStateRepositoryTests {
     @Test
     fun getHealth_batteryHealthOverVoltage_returnOvervoltage() {
         assertEquals(
-            BatteryStateRepositoryUtils().getHealth(BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE),
+            BatteryStateRepositoryUtils.getHealth(BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE),
             "Overvoltage"
         )
     }
@@ -248,7 +248,7 @@ class BatteryStateRepositoryTests {
     @Test
     fun getHealth_batteryHealthUnspecifiedFailure_returnFailure() {
         assertEquals(
-            BatteryStateRepositoryUtils().getHealth(BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE),
+            BatteryStateRepositoryUtils.getHealth(BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE),
             "Failure"
         )
     }
@@ -256,7 +256,7 @@ class BatteryStateRepositoryTests {
     @Test
     fun getHealth_batteryHealthUnknown_returnUnknown() {
         assertEquals(
-            BatteryStateRepositoryUtils().getHealth(BatteryManager.BATTERY_HEALTH_UNKNOWN),
+            BatteryStateRepositoryUtils.getHealth(BatteryManager.BATTERY_HEALTH_UNKNOWN),
             "Unknown"
         )
     }
@@ -265,7 +265,7 @@ class BatteryStateRepositoryTests {
     @Test
     fun getChargingStatus_statusFull_returnFull() {
         assertEquals(
-            BatteryStateRepositoryUtils().getChargingStatus(BatteryManager.BATTERY_STATUS_FULL),
+            BatteryStateRepositoryUtils.getChargingStatus(BatteryManager.BATTERY_STATUS_FULL),
             "Full"
         )
     }
@@ -273,7 +273,7 @@ class BatteryStateRepositoryTests {
     @Test
     fun getChargingStatus_statusCharging_returnCharging() {
         assertEquals(
-            BatteryStateRepositoryUtils().getChargingStatus(BatteryManager.BATTERY_STATUS_CHARGING),
+            BatteryStateRepositoryUtils.getChargingStatus(BatteryManager.BATTERY_STATUS_CHARGING),
             "Charging"
         )
     }
@@ -281,7 +281,7 @@ class BatteryStateRepositoryTests {
     @Test
     fun getChargingStatus_statusDischarging_returnDischarging() {
         assertEquals(
-            BatteryStateRepositoryUtils().getChargingStatus(BatteryManager.BATTERY_STATUS_DISCHARGING),
+            BatteryStateRepositoryUtils.getChargingStatus(BatteryManager.BATTERY_STATUS_DISCHARGING),
             "Discharging"
         )
     }
@@ -289,7 +289,7 @@ class BatteryStateRepositoryTests {
     @Test
     fun getChargingStatus_statusNotCharging_returnNotCharging() {
         assertEquals(
-            BatteryStateRepositoryUtils().getChargingStatus(BatteryManager.BATTERY_STATUS_NOT_CHARGING),
+            BatteryStateRepositoryUtils.getChargingStatus(BatteryManager.BATTERY_STATUS_NOT_CHARGING),
             "Not charging"
         )
     }
@@ -297,7 +297,7 @@ class BatteryStateRepositoryTests {
     @Test
     fun getChargingStatus_statusUnknown_returnUnknown() {
         assertEquals(
-            BatteryStateRepositoryUtils().getChargingStatus(BatteryManager.BATTERY_STATUS_UNKNOWN),
+            BatteryStateRepositoryUtils.getChargingStatus(BatteryManager.BATTERY_STATUS_UNKNOWN),
             "Unknown"
         )
     }

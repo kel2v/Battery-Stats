@@ -4,6 +4,7 @@ import com.bytemanager.stats.data_structure.TimestampInterval
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
+import java.time.LocalDate
 import java.time.ZoneId
 import kotlin.test.assertEquals
 
@@ -119,6 +120,12 @@ class BatteryTempRepositoryUtilsTest {
         zoneId: ZoneId,
         expected: TimestampInterval
     ) {
-        assertEquals(expected, TimestampIntervalUtils().convertDayIntoTimestampBasedInterval(year, month, day, zoneId))
+        val statsTime = StatsTime(zoneId)
+        assertEquals(
+            expected.copy(
+                startTimestamp = expected.startTimestamp,
+                endTimestamp = expected.endTimestamp+1
+            ),
+            statsTime.localDayToTimestampInterval(LocalDate.of(year, month, day)))
     }
 }

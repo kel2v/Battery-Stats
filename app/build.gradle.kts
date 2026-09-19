@@ -85,6 +85,7 @@ dependencies {
     implementation(libs.androidx.work.testing)
     implementation(libs.androidx.hilt.work)
     implementation(libs.androidx.runner)
+    implementation(libs.mediation.test.suite)
 
     // hilt
     ksp(libs.hilt.android.compiler)

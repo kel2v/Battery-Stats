@@ -6,7 +6,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.bytemanager.stats.data.DbFillData
 import com.bytemanager.stats.interfaces.BatteryTempHistoryRepositoryInterface
-import com.bytemanager.stats.utils.TimestampIntervalUtils
+import com.bytemanager.stats.utils.StatsTime
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import junit.framework.TestCase.assertEquals
@@ -18,6 +18,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.time.LocalDate
 import java.time.ZoneId
 import javax.inject.Inject
 
@@ -32,7 +33,7 @@ class TimestampedBatteryTempDaoTest {
     lateinit var batteryTempHistoryRepository: BatteryTempHistoryRepositoryInterface
     private lateinit var dbDao: TimestampedBatteryTempDao
 
-    private val dbFillData = DbFillData()
+    private val dbFillData = DbFillData
     private val jan1st1970List = dbFillData.jan1st1970List
     private val jan2nd1970List = dbFillData.jan2nd1970List
     private val jan3rd1970List = dbFillData.jan3rd1970List
@@ -92,9 +93,10 @@ class TimestampedBatteryTempDaoTest {
         year: Int, month: Int, day: Int,
         zoneId: ZoneId
     ) {
-        val timestampRange = TimestampIntervalUtils().convertDayIntoTimestampBasedInterval(year, month, day, zoneId)
+        val localDate = LocalDate.of(year, month, day)
+        val timestampRange = StatsTime().localDayToTimestampInterval(localDate)
         val resultList = getFirstValueOfFlow(
-            dao.getAllByDate(year, month, day, zoneId)
+            dao.getAllByLocalDate(localDate)
         )
         val expectedList = expectedListFull.filter {
             it.timestamp >= timestampRange.startTimestamp && it.timestamp <= timestampRange.endTimestamp

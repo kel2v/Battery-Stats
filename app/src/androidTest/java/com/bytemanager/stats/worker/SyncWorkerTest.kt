@@ -92,7 +92,7 @@ class SyncWorkerTest {
 
     @Test
     fun testPeriodicWork_initialDelaySet15Minutes_validOutput() {
-        val tempDataSource = DbFillData()
+        val tempDataSource = DbFillData
         runBlocking {
             tempDataSource.jan1st1970List.forEach {
                 batteryTempHistoryRepository.buffer.addItemToBuffer(it)
@@ -122,7 +122,7 @@ class SyncWorkerTest {
 
     @Test
     fun testPeriodicWork_periodicDelaySet15Minutes_validOutput() {
-        val tempDataSource = DbFillData()
+        val tempDataSource = DbFillData
         runBlocking {
             tempDataSource.jan1st1970List.forEach {
                 batteryTempHistoryRepository.buffer.addItemToBuffer(it)
@@ -151,7 +151,7 @@ class SyncWorkerTest {
 
     @Test
     fun testPeriodicWork_initialDelayAndPeriodicDelaySet15Minutes_validOutput() {
-        val tempDataSource = DbFillData()
+        val tempDataSource = DbFillData
         runBlocking {
             tempDataSource.jan1st1970List.forEach {
                 batteryTempHistoryRepository.buffer.addItemToBuffer(it)

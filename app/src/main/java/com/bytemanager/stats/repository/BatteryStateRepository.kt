@@ -34,7 +34,7 @@ class BatteryStateRepository @Inject constructor(
             override fun onReceive(context: Context?, intent: Intent?) {
                 if(intent == null) return
 
-                val batteryStateRepositoryUtils = BatteryStateRepositoryUtils()
+                val batteryStateRepositoryUtils = BatteryStateRepositoryUtils
                 val state = BatteryState(
                     timestamp = Instant.now().atZone(ZoneId.systemDefault()).toEpochSecond(),
                     level = batteryStateRepositoryUtils.getBatteryLevelPercentage(

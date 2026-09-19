@@ -4,9 +4,9 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.bytemanager.stats.utils.TimestampIntervalUtils
+import com.bytemanager.stats.utils.StatsTime
 import kotlinx.coroutines.flow.Flow
-import java.time.ZoneId
+import java.time.LocalDate
 
 @Dao
 interface TimestampedBatteryTempDao {
@@ -16,22 +16,17 @@ interface TimestampedBatteryTempDao {
     @Query("SELECT * FROM timestampedBatteryTemp")
     suspend fun getAll(): List<TimestampedBatteryTemp>
 
-    @Query("SELECT * FROM timestampedBatteryTemp WHERE timestamp >= :startTimestamp AND timestamp <= :endTimestamp")
+    @Query("SELECT * FROM timestampedBatteryTemp WHERE timestamp >= :startTimestamp AND timestamp < :endTimestamp")
     fun getByTimestampRange(startTimestamp: Long, endTimestamp: Long): Flow<List<TimestampedBatteryTemp>>
 
-    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(newInsertList: List<TimestampedBatteryTemp>)
 
     @Query("DELETE FROM timestampedBatteryTemp")
     suspend fun deleteAll()
 
-    fun getAllByDate(
-        year: Int,
-        month: Int,
-        day: Int,
-        zoneId: ZoneId
-    ): Flow<List<TimestampedBatteryTemp>> {
-        val timestampBasedTimeInterval = TimestampIntervalUtils().convertDayIntoTimestampBasedInterval(year, month, day, zoneId)
-        return getByTimestampRange(timestampBasedTimeInterval.startTimestamp, timestampBasedTimeInterval.endTimestamp)
+    fun getAllByLocalDate(localDate: LocalDate): Flow<List<TimestampedBatteryTemp>> {
+        val timestampInterval = StatsTime().localDayToTimestampInterval(localDate)
+        return getByTimestampRange(timestampInterval.startTimestamp, timestampInterval.endTimestamp)
     }
 }
