@@ -16,17 +16,7 @@ class StatsLogger @Inject constructor(
     private val batteryStateRepository: BatteryStateRepository,
     private val batteryTempHistoryRepository: BatteryTempHistoryRepositoryInterface
 ) {
-    suspend fun startStatsLogger(startForeground: (Int, Notification) -> Unit) {
-        StatsNotificationManager.createStatsNotificationChannel(appContext)
-        startForeground(
-            1,
-            StatsNotificationManager.buildStatsNotification(
-                appContext,
-                batteryStateRepository.batteryStateStateFlow.value
-            )
-        )
-
-        Log.d("DEBUGGING LOGS", "'postLoggingNotifications' started.")
+    suspend fun startStatsLogger() {
         logger()
     }
 
@@ -39,7 +29,7 @@ class StatsLogger @Inject constructor(
         }
     }
 
-    private suspend fun logTemperature(value: BatteryState) {  // internally calls a suspending function
+    private suspend fun logTemperature(value: BatteryState) {
         val newRecord = TimestampedBatteryTemp(timestamp = value.timestamp, temperature = value.temperature)
         Log.d("DEBUGGING LOGS", "Adding new batteryTemp to buffer: $value")
         batteryTempHistoryRepository.buffer.addItemToBuffer(newRecord)

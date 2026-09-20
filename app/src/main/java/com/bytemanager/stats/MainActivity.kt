@@ -1,8 +1,12 @@
 package com.bytemanager.stats
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.PowerManager
+import android.provider.Settings
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.core.net.toUri
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequestBuilder
@@ -29,6 +34,7 @@ import java.util.concurrent.TimeUnit
 class MainActivity: ComponentActivity() {
     private lateinit var requestNotificationPermissionLauncher: ActivityResultLauncher<String>
 
+    @SuppressLint("BatteryLife")
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d("DEBUGGING LOGS", "running onCreate")
         super.onCreate(savedInstanceState)
@@ -70,6 +76,22 @@ class MainActivity: ComponentActivity() {
                 periodicRequest
             )
         }
+
+
+        val powerManager = getSystemService(PowerManager::class.java)
+        val exempt = powerManager.isIgnoringBatteryOptimizations(packageName)
+
+        Log.d("DEBUGGING LOGS", "exempt: $exempt")
+
+
+        if (!exempt) {
+            val intent = Intent(
+                Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
+                "package:$packageName".toUri()
+            )
+            startActivity(intent)
+        }
+
 
         setContent {
             StatsTheme {

@@ -19,8 +19,4 @@ class StatsNotificationServiceController(private val appContext: Context): Stats
         Log.d("DEBUGGING LOGS", "stopping `StatsLoggingNotificationService`.")
         appContext.stopService(intent)
     }
-
-    fun isRunning(): Boolean {
-        return StatsLoggingNotificationService.isRunning.value
-    }
 }
