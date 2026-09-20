@@ -44,12 +44,17 @@ fun DayWiseBatteryTempGraph(
             }
         }
 
+        val minY = minMaxList.minBy { it.minTemperature }.minTemperature
+        val maxY = minMaxList.maxBy { it.maxTemperature }.maxTemperature
+
         CartesianChartHost(
             chart = rememberCartesianChart(
                 rememberCandlestickCartesianLayer(
                     rangeProvider = CartesianLayerRangeProvider.fixed(
                         minX = 0.0,
-                        maxX = 24.0
+                        maxX = 24.0,
+                        minY = minY - 3.0,
+                        maxY = maxY + 3.0
                     )
                 ),
                 startAxis = VerticalAxis.rememberStart(),
