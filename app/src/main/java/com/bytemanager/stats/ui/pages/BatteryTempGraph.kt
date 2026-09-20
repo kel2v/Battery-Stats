@@ -194,7 +194,7 @@ private fun DateSelectorMenu(
     if(!isSelectDateButtonClicked) {
         SelectedDateLabel(
             date = date,
-            spacerModifier = Modifier.width(20.dp),
+            modifier = Modifier.width(20.dp),
             onSelectDateButtonClick = onSelectDateButtonClick
         )
     } else {
@@ -223,12 +223,12 @@ private fun DateSelectorMenu(
 @Composable
 private fun SelectedDateLabel(
     date: LocalDate,
-    spacerModifier: Modifier,
+    modifier: Modifier,
     onSelectDateButtonClick: () -> Unit
 ) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text("${stringResource(R.string.date_selected)}: $date")
-        Spacer(modifier = spacerModifier)
+        Spacer(modifier = modifier)
         Button(
             onClick = onSelectDateButtonClick
         ) {

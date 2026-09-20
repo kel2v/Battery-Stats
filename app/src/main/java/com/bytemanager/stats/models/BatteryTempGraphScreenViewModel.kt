@@ -156,7 +156,7 @@ class BatteryTempGraphScreenViewModel  @Inject constructor(batteryTempHistoryRep
 
     private fun extractSelectedDate(millis: Long?) {
         _dateSelected.update {
-            StatsTime().millisToLocalDate(millis)?: StatsTime().today()
+            StatsTime().millisToLocalDate(millis) ?: StatsTime().today()
         }
         Log.d("DEBUGGING LOGS", "millis: $millis, selectedDate = ${dateSelected.value}")
     }
