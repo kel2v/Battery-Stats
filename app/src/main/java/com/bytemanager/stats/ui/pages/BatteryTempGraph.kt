@@ -24,23 +24,22 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.bytemanager.stats.R
 import com.bytemanager.stats.enums.GraphType
-import com.bytemanager.stats.models.BatteryTempGraphScreenViewModel
 import com.bytemanager.stats.ui.graphs.DayWiseBatteryTempGraph
 import java.time.LocalDate
 
 
 @Composable
-fun BatteryTempGraphScreen(batteryTempGraphScreenViewModel: BatteryTempGraphScreenViewModel = hiltViewModel()) {
+fun BatteryTempGraph(batteryTempGraphViewModel: BatteryTempGraphViewModel = hiltViewModel()) {
     val datePickerState = rememberDatePickerState()
 
-    val isSelectGraphTypeButtonClicked by remember { batteryTempGraphScreenViewModel.isSelectGraphTypeButtonClicked }
-    val isSelectDateButtonClicked by remember { batteryTempGraphScreenViewModel.isSelectDateButtonClicked }
+    val isSelectGraphTypeButtonClicked by remember { batteryTempGraphViewModel.isSelectGraphTypeButtonClicked }
+    val isSelectDateButtonClicked by remember { batteryTempGraphViewModel.isSelectDateButtonClicked }
 
 
-    val date by batteryTempGraphScreenViewModel.dateSelected.collectAsState()
-    val graphType by batteryTempGraphScreenViewModel.graphTypeSelected
-    val minMaxList by batteryTempGraphScreenViewModel.intervalWiseTempMinMaxStateFlow.collectAsState()
-    val intervalSize by batteryTempGraphScreenViewModel.intervalSize
+    val date by batteryTempGraphViewModel.dateSelected.collectAsState()
+    val graphType by batteryTempGraphViewModel.graphTypeSelected
+    val minMaxList by batteryTempGraphViewModel.intervalWiseTempMinMaxStateFlow.collectAsState()
+    val intervalSize by batteryTempGraphViewModel.intervalSize
 
     Column {
         GraphTypeSelectorMenu(
@@ -49,28 +48,28 @@ fun BatteryTempGraphScreen(batteryTempGraphScreenViewModel: BatteryTempGraphScre
             isSelectGraphTypeButtonClicked = isSelectGraphTypeButtonClicked,
 
             onClickSelectGraphType = {
-                batteryTempGraphScreenViewModel.onSelectGraphTypeButtonClicked()
+                batteryTempGraphViewModel.onSelectGraphTypeButtonClicked()
             },
 
             onClickDismissRequest = {
-                batteryTempGraphScreenViewModel.onClickSelectGraphDismissRequest()
+                batteryTempGraphViewModel.onClickSelectGraphDismissRequest()
             },
 
 
             onClickLiveGraph = {
-                batteryTempGraphScreenViewModel.onClickLiveGraph()
+                batteryTempGraphViewModel.onClickLiveGraph()
             },
             onClickDayGraph = {
-                batteryTempGraphScreenViewModel.onClickDayGraph()
+                batteryTempGraphViewModel.onClickDayGraph()
             },
             onClickWeekGraph = {
-                batteryTempGraphScreenViewModel.onClickWeekGraph()
+                batteryTempGraphViewModel.onClickWeekGraph()
             },
             onClickMonthGraph = {
-                batteryTempGraphScreenViewModel.onClickMonthGraph()
+                batteryTempGraphViewModel.onClickMonthGraph()
             },
             onClickYearGraph = {
-                batteryTempGraphScreenViewModel.onClickYearGraph()
+                batteryTempGraphViewModel.onClickYearGraph()
             }
         )
 
@@ -80,16 +79,16 @@ fun BatteryTempGraphScreen(batteryTempGraphScreenViewModel: BatteryTempGraphScre
                 isSelectDateButtonClicked = isSelectDateButtonClicked,
                 date = date,
                 onSelectDateButtonClick =  {
-                    batteryTempGraphScreenViewModel.onSelectDateButtonClicked()
+                    batteryTempGraphViewModel.onSelectDateButtonClicked()
                 },
                 onDismissRequest = {
-                    batteryTempGraphScreenViewModel.onDatePickerDismissRequest()
+                    batteryTempGraphViewModel.onDatePickerDismissRequest()
                 },
                 onDismissButtonClick = {
-                    batteryTempGraphScreenViewModel.onDatePickerDismissButtonClick()
+                    batteryTempGraphViewModel.onDatePickerDismissButtonClick()
                 },
                 onConfirmButtonClick = {
-                    batteryTempGraphScreenViewModel.onDatePickerConfirmButtonClick(datePickerState.selectedDateMillis)
+                    batteryTempGraphViewModel.onDatePickerConfirmButtonClick(datePickerState.selectedDateMillis)
                 }
             )
 

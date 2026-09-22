@@ -1,4 +1,4 @@
-package com.bytemanager.stats.models
+package com.bytemanager.stats.ui.pages
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel

@@ -1,4 +1,4 @@
-package com.bytemanager.stats.models
+package com.bytemanager.stats.ui.pages
 
 import android.util.Log
 import androidx.compose.runtime.MutableState
@@ -25,7 +25,7 @@ import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
-class BatteryTempGraphScreenViewModel  @Inject constructor(batteryTempHistoryRepository: BatteryTempHistoryRepositoryInterface): ViewModel() {
+class BatteryTempGraphViewModel  @Inject constructor(batteryTempHistoryRepository: BatteryTempHistoryRepositoryInterface): ViewModel() {
     private val dbDao = batteryTempHistoryRepository.dbDao
     var intervalSize = mutableIntStateOf(60 * 60)
         private set

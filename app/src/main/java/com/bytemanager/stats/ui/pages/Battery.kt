@@ -18,7 +18,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
-import com.bytemanager.stats.models.BatteryViewModel
 import com.bytemanager.stats.ui.listitem.ListItem
 import com.bytemanager.stats.utils.StatsNotificationServiceController
 
@@ -54,6 +53,6 @@ fun Battery(batteryViewModel: BatteryViewModel = hiltViewModel(checkNotNull(Loca
 
         Spacer(Modifier.height(40.dp))
 
-        BatteryTempGraphScreen()
+        BatteryTempGraph()
     }
 }

@@ -22,7 +22,7 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import com.bytemanager.stats.models.BatteryViewModel
+import com.bytemanager.stats.ui.pages.BatteryViewModel
 import com.bytemanager.stats.notification.StatsNotificationManager
 import com.bytemanager.stats.ui.theme.StatsTheme
 import com.bytemanager.stats.utils.StatsNotificationServiceController
