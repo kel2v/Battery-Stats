@@ -1,7 +1,7 @@
 package com.bytemanager.stats.utils
 
-import com.bytemanager.stats.database.TimestampedBatteryTemp
-import com.bytemanager.stats.database.TimestampedBatteryTempDao
+import com.bytemanager.stats.data.database.TimestampedBatteryTemp
+import com.bytemanager.stats.data.database.TimestampedBatteryTempDao
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 

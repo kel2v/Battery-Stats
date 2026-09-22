@@ -6,8 +6,8 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bytemanager.stats.data_structure.IntervalWiseBatteryTempMinMax
-import com.bytemanager.stats.enums.GraphType
+import com.bytemanager.stats.data.types.IntervalWiseBatteryTempMinMax
+import com.bytemanager.stats.data.types.GraphType
 import com.bytemanager.stats.interfaces.BatteryTempHistoryRepositoryInterface
 import com.bytemanager.stats.utils.IntervalWiseMinMax
 import com.bytemanager.stats.utils.StatsTime

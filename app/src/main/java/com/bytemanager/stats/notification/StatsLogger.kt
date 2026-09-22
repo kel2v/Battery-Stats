@@ -4,10 +4,10 @@ import android.app.Notification
 import android.app.NotificationManager
 import android.content.Context
 import android.util.Log
-import com.bytemanager.stats.data_structure.BatteryState
-import com.bytemanager.stats.database.TimestampedBatteryTemp
+import com.bytemanager.stats.data.types.BatteryState
+import com.bytemanager.stats.data.database.TimestampedBatteryTemp
 import com.bytemanager.stats.interfaces.BatteryTempHistoryRepositoryInterface
-import com.bytemanager.stats.repository.BatteryStateRepository
+import com.bytemanager.stats.data.repository.BatteryStateRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 

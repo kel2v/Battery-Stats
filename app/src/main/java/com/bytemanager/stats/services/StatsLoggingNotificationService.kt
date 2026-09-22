@@ -7,7 +7,7 @@ import android.util.Log
 import com.bytemanager.stats.interfaces.BatteryTempHistoryRepositoryInterface
 import com.bytemanager.stats.notification.StatsLogger
 import com.bytemanager.stats.notification.StatsNotificationManager
-import com.bytemanager.stats.repository.BatteryStateRepository
+import com.bytemanager.stats.data.repository.BatteryStateRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

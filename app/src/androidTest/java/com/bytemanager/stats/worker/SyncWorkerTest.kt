@@ -12,8 +12,8 @@ import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.testing.SynchronousExecutor
 import androidx.work.testing.WorkManagerTestInitHelper
-import com.bytemanager.stats.data.DbFillData
-import com.bytemanager.stats.database.TimestampedBatteryTemp
+import com.bytemanager.stats.data.testdata.DbFillData
+import com.bytemanager.stats.data.database.TimestampedBatteryTemp
 import com.bytemanager.stats.interfaces.BatteryTempHistoryRepositoryInterface
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest

@@ -1,6 +1,6 @@
 package com.bytemanager.stats.utils
 
-import com.bytemanager.stats.data_structure.TimestampInterval
+import com.bytemanager.stats.data.types.TimestampInterval
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId

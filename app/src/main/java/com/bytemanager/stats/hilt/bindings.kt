@@ -1,7 +1,7 @@
 package com.bytemanager.stats.hilt
 
 import com.bytemanager.stats.interfaces.BatteryTempHistoryRepositoryInterface
-import com.bytemanager.stats.repository.BatteryTempHistoryRepository
+import com.bytemanager.stats.data.repository.BatteryTempHistoryRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

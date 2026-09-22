@@ -1,4 +1,4 @@
-package com.bytemanager.stats.repository
+package com.bytemanager.stats.data.repository
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -7,7 +7,7 @@ import android.content.IntentFilter
 import android.os.BatteryManager
 import android.util.Log
 import com.bytemanager.stats.R
-import com.bytemanager.stats.data_structure.BatteryState
+import com.bytemanager.stats.data.types.BatteryState
 import com.bytemanager.stats.hilt.ApplicationCoroutineScope
 import com.bytemanager.stats.utils.BatteryStateRepositoryUtils
 import dagger.hilt.android.qualifiers.ApplicationContext

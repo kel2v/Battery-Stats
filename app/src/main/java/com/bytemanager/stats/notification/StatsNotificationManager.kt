@@ -10,7 +10,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.bytemanager.stats.MainActivity
 import com.bytemanager.stats.R
-import com.bytemanager.stats.data_structure.BatteryState
+import com.bytemanager.stats.data.types.BatteryState
 
 object StatsNotificationManager {
     var notificationPermissionGranted = false

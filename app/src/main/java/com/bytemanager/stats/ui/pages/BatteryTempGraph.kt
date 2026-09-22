@@ -23,7 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.bytemanager.stats.R
-import com.bytemanager.stats.enums.GraphType
+import com.bytemanager.stats.data.types.GraphType
 import com.bytemanager.stats.ui.graphs.DayWiseBatteryTempGraph
 import java.time.LocalDate
 

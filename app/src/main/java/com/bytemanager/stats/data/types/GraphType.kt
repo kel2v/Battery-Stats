@@ -1,4 +1,4 @@
-package com.bytemanager.stats.enums
+package com.bytemanager.stats.data.types
 
 enum class GraphType {
     LIVE_GRAPH,

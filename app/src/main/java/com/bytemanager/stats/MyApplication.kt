@@ -3,7 +3,7 @@ package com.bytemanager.stats
 import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
-import com.bytemanager.stats.repository.BatteryTempHistoryRepository
+import com.bytemanager.stats.data.repository.BatteryTempHistoryRepository
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 

@@ -1,6 +1,6 @@
 package com.bytemanager.stats.utils
 
-import com.bytemanager.stats.data_structure.TimestampInterval
+import com.bytemanager.stats.data.types.TimestampInterval
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource

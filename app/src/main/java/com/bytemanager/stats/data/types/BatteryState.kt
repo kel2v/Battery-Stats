@@ -1,4 +1,4 @@
-package com.bytemanager.stats.data_structure
+package com.bytemanager.stats.data.types
 
 data class BatteryState(
     val timestamp: Long,

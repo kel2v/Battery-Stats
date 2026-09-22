@@ -1,9 +1,9 @@
-package com.bytemanager.stats.repository
+package com.bytemanager.stats.data.repository
 
 import android.content.Context
 import androidx.room.Room
-import com.bytemanager.stats.database.TimestampedBatteryTempDao
-import com.bytemanager.stats.database.TimestampedBatteryTempDatabase
+import com.bytemanager.stats.data.database.TimestampedBatteryTempDao
+import com.bytemanager.stats.data.database.TimestampedBatteryTempDatabase
 import com.bytemanager.stats.interfaces.BatteryTempHistoryRepositoryInterface
 import com.bytemanager.stats.utils.TimestampedBatteryTempBuffer
 import dagger.hilt.android.qualifiers.ApplicationContext

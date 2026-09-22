@@ -1,6 +1,6 @@
-package com.bytemanager.stats.data
+package com.bytemanager.stats.data.testdata
 
-import com.bytemanager.stats.database.TimestampedBatteryTemp
+import com.bytemanager.stats.data.database.TimestampedBatteryTemp
 
 object DbFillData {
     val jan1st1970List = listOf(

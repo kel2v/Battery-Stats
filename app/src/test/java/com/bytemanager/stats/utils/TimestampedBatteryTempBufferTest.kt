@@ -1,8 +1,8 @@
 package com.bytemanager.stats.utils
 
-import com.bytemanager.stats.data.DbFillData
-import com.bytemanager.stats.database.TimestampedBatteryTemp
-import com.bytemanager.stats.database.TimestampedBatteryTempDao
+import com.bytemanager.stats.data.testdata.DbFillData
+import com.bytemanager.stats.data.database.TimestampedBatteryTemp
+import com.bytemanager.stats.data.database.TimestampedBatteryTempDao
 import junit.framework.TestCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -10,7 +10,6 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import java.time.LocalDate
-import java.time.ZoneId
 
 class TimestampedBatteryTempBufferTest {
     class MockDao: TimestampedBatteryTempDao {

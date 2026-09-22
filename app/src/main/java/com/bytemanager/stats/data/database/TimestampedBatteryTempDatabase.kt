@@ -1,4 +1,4 @@
-package com.bytemanager.stats.database
+package com.bytemanager.stats.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

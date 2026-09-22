@@ -4,7 +4,9 @@ import android.content.Context
 import android.util.Log
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.bytemanager.stats.data.DbFillData
+import com.bytemanager.stats.data.database.TimestampedBatteryTemp
+import com.bytemanager.stats.data.database.TimestampedBatteryTempDao
+import com.bytemanager.stats.data.testdata.DbFillData
 import com.bytemanager.stats.interfaces.BatteryTempHistoryRepositoryInterface
 import com.bytemanager.stats.utils.StatsTime
 import dagger.hilt.android.testing.HiltAndroidRule

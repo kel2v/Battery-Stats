@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import com.bytemanager.stats.R
-import com.bytemanager.stats.data_structure.IntervalWiseBatteryTempMinMax
+import com.bytemanager.stats.data.types.IntervalWiseBatteryTempMinMax
 import com.patrykandpatrick.vico.compose.cartesian.CartesianChartHost
 import com.patrykandpatrick.vico.compose.cartesian.axis.HorizontalAxis
 import com.patrykandpatrick.vico.compose.cartesian.axis.VerticalAxis

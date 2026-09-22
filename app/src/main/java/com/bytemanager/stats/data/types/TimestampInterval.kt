@@ -1,4 +1,4 @@
-package com.bytemanager.stats.data_structure
+package com.bytemanager.stats.data.types
 
 data class TimestampInterval(
     val startTimestamp: Long,

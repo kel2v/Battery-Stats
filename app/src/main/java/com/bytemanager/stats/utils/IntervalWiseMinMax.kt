@@ -1,7 +1,7 @@
 package com.bytemanager.stats.utils
 
-import com.bytemanager.stats.data_structure.IntervalWiseBatteryTempMinMax
-import com.bytemanager.stats.database.TimestampedBatteryTemp
+import com.bytemanager.stats.data.types.IntervalWiseBatteryTempMinMax
+import com.bytemanager.stats.data.database.TimestampedBatteryTemp
 import java.time.LocalDate
 import kotlin.math.max
 import kotlin.math.min
