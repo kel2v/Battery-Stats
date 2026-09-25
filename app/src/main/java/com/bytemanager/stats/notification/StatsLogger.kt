@@ -4,10 +4,10 @@ import android.app.Notification
 import android.app.NotificationManager
 import android.content.Context
 import android.util.Log
-import com.bytemanager.stats.data.types.BatteryState
 import com.bytemanager.stats.data.database.TimestampedBatteryTemp
-import com.bytemanager.stats.interfaces.BatteryTempHistoryRepositoryInterface
 import com.bytemanager.stats.data.repository.BatteryStateRepository
+import com.bytemanager.stats.data.types.BatteryState
+import com.bytemanager.stats.interfaces.BatteryTempHistoryRepositoryInterface
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -36,18 +36,16 @@ class StatsLogger @Inject constructor(
     }
 
     private fun notifyLogging(value: BatteryState, notificationManager: NotificationManager) {
-        if(StatsNotificationManager.notificationPermissionGranted) {
-            val notification = StatsNotificationManager.buildStatsNotification(appContext, value)
-            notificationManager.notify(1, notification)
-            Log.d(
-                "DEBUGGING LOGS",
-                "${
-                    notification.extras.getString(
-                        Notification.EXTRA_TITLE,
-                        "NA"
-                    )
-                }\n${notification.extras.getString(Notification.EXTRA_TEXT, "NA")}"
-            )
-        }
+        val notification = StatsNotificationManager.buildStatsNotification(appContext, value)
+        notificationManager.notify(1, notification)
+        Log.d(
+            "DEBUGGING LOGS",
+            "Posting new notification = ${
+                notification.extras.getString(
+                    Notification.EXTRA_TITLE,
+                    "NA"
+                )
+            }\n${notification.extras.getString(Notification.EXTRA_TEXT, "NA")}"
+        )
     }
 }

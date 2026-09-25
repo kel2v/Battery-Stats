@@ -4,20 +4,23 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
+import com.bytemanager.stats.data.repository.BatteryStateRepository
 import com.bytemanager.stats.interfaces.BatteryTempHistoryRepositoryInterface
 import com.bytemanager.stats.notification.StatsLogger
 import com.bytemanager.stats.notification.StatsNotificationManager
-import com.bytemanager.stats.data.repository.BatteryStateRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.cancellation.CancellationException
 
 @AndroidEntryPoint
 class StatsLoggingNotificationService: Service() {
+    private var job: Job? = null
     @Inject lateinit var batteryStateRepository: BatteryStateRepository
     @Inject lateinit var batteryTempHistoryRepository: BatteryTempHistoryRepositoryInterface
     @Inject lateinit var statsLogger: StatsLogger
@@ -32,15 +35,14 @@ class StatsLoggingNotificationService: Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d("StatsLoggingNotificationService.onStartCommand", "Running onStartCommand")
-
-        if (intent == null) {
-            Log.d("StatsLoggingNotificationService.onStartCommand", "Restarted by OS with null intent, stopping.")
-            stopSelf()
-            return START_NOT_STICKY
+        if(job?.isActive == true) {
+            return START_STICKY
         }
 
+        Log.d("StatsLoggingNotificationService.onStartCommand", "Running onStartCommand")
+
         StatsNotificationManager.createStatsNotificationChannel(applicationContext)
+
         startForeground(
             1,
             StatsNotificationManager.buildStatsNotification(
@@ -49,15 +51,15 @@ class StatsLoggingNotificationService: Service() {
             )
         )
 
-        Log.d("StatsLoggingNotificationService.onStartCommand", "'postLoggingNotifications' started.")
-
-        scope.launch {
+        job = scope.launch {
             try {
                 statsLogger.startStatsLogger()
+            } catch (e: CancellationException) {
+                // Expected when the service is destroyed
+                throw e
             } catch (e: Exception) {
-                Log.d("StatsLoggingNotificationService.onStartCommand", "Exception occurred: $e")
-            } finally {
-                stopSelf(startId)
+                Log.e("StatsLoggingNotificationService.onStartCommand", "Stats logger failed", e)
+                stopSelf()
             }
         }
 
@@ -67,7 +69,11 @@ class StatsLoggingNotificationService: Service() {
 
     override fun onDestroy() {
         Log.d("StatsLoggingNotificationService.onDestroy", "Running StatsNotificationService.onDestroy")
+
+        job?.cancel()
+        job = null
         scope.cancel()
+
         StatsNotificationManager.closeStatsNotificationChannel(applicationContext)
         stopForeground(STOP_FOREGROUND_REMOVE)
         super.onDestroy()
