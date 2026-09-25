@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import com.bytemanager.stats.utils.StatsTime
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDate
@@ -24,6 +25,12 @@ interface TimestampedBatteryTempDao {
 
     @Query("DELETE FROM timestampedBatteryTemp")
     suspend fun deleteAll()
+
+    @Transaction
+    suspend fun replaceAllItems(newItems: List<TimestampedBatteryTemp>) {
+        deleteAll()
+        insertAll(newItems)
+    }
 
     fun getAllByLocalDate(localDate: LocalDate): Flow<List<TimestampedBatteryTemp>> {
         val timestampInterval = StatsTime().localDayToTimestampInterval(localDate)

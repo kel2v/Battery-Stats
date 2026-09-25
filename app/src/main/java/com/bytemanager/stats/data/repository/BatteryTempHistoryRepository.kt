@@ -17,7 +17,9 @@ class BatteryTempHistoryRepository @Inject constructor(@ApplicationContext priva
         appContext,
         TimestampedBatteryTempDatabase::class.java,
         "timeStampedBatteryTemp"
-    ).build()
+    )
+        .addMigrations(TimestampedBatteryTempDatabase.Migration_1_TO_2)
+        .build()
     override val dbDao: TimestampedBatteryTempDao = db.timeStampedBatteryTempDao()
 
     override fun closeDB() {

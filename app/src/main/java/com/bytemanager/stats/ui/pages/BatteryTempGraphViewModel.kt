@@ -6,6 +6,9 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bytemanager.stats.data.testdata.DenseList_0_86400
+import com.bytemanager.stats.data.testdata.DenseList_172800_259200
+import com.bytemanager.stats.data.testdata.DenseList_86400_172800
 import com.bytemanager.stats.data.types.IntervalWiseBatteryTempMinMax
 import com.bytemanager.stats.data.types.GraphType
 import com.bytemanager.stats.interfaces.BatteryTempHistoryRepositoryInterface
@@ -21,6 +24,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.runBlocking
 import java.time.LocalDate
 import javax.inject.Inject
 
