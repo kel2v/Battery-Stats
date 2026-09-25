@@ -41,6 +41,9 @@ fun BatteryTempGraph(batteryTempGraphViewModel: BatteryTempGraphViewModel = hilt
     val minMaxList by batteryTempGraphViewModel.intervalWiseTempMinMaxStateFlow.collectAsState()
     val intervalSize by batteryTempGraphViewModel.intervalSize
 
+    val minTemperature by batteryTempGraphViewModel.minTemperature.collectAsState()
+    val maxTemperature by batteryTempGraphViewModel.maxTemperature.collectAsState()
+
     Column {
         GraphTypeSelectorMenu(
             graphType = graphType,
@@ -94,7 +97,9 @@ fun BatteryTempGraph(batteryTempGraphViewModel: BatteryTempGraphViewModel = hilt
 
             DayWiseBatteryTempGraph(
                 intervalSize,
-                minMaxList
+                minMaxList,
+                minTemperature,
+                maxTemperature
             )
         }
     }

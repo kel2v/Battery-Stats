@@ -1,5 +1,6 @@
 package com.bytemanager.stats.ui.graphs
 
+import android.health.connect.datatypes.units.Temperature
 import android.util.Log
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,11 +20,15 @@ import com.patrykandpatrick.vico.compose.cartesian.data.candlestickModel
 import com.patrykandpatrick.vico.compose.cartesian.layer.rememberCandlestickCartesianLayer
 import com.patrykandpatrick.vico.compose.cartesian.rememberCartesianChart
 import com.patrykandpatrick.vico.compose.cartesian.rememberVicoScrollState
+import kotlin.math.ceil
+import kotlin.math.floor
 
 @Composable
 fun DayWiseBatteryTempGraph(
     intervalSize: Int,
-    minMaxList: List<IntervalWiseBatteryTempMinMax>
+    minMaxList: List<IntervalWiseBatteryTempMinMax>,
+    minTemperature: Float?,
+    maxTemperature: Float?
 ) {
     Log.d("DEBUGGING LOGS", "Recomposing DayWiseBatteryTempGraph")
 
@@ -44,8 +49,8 @@ fun DayWiseBatteryTempGraph(
             }
         }
 
-        val minY = minMaxList.minBy { it.minTemperature }.minTemperature
-        val maxY = minMaxList.maxBy { it.maxTemperature }.maxTemperature
+//        val minY = minMaxList.minBy { it.minTemperature }.minTemperature
+//        val maxY = minMaxList.maxBy { it.maxTemperature }.maxTemperature
 
         CartesianChartHost(
             chart = rememberCartesianChart(
@@ -53,8 +58,8 @@ fun DayWiseBatteryTempGraph(
                     rangeProvider = CartesianLayerRangeProvider.fixed(
                         minX = 0.0,
                         maxX = 24.0,
-                        minY = minY - 3.0,
-                        maxY = maxY + 3.0
+                        minY = floor(minTemperature!!) - 3.0,
+                        maxY = ceil(maxTemperature!!) + 3.0
                     )
                 ),
                 startAxis = VerticalAxis.rememberStart(),

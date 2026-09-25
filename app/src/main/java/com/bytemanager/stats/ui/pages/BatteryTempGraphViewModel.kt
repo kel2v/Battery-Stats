@@ -29,7 +29,9 @@ import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
-class BatteryTempGraphViewModel  @Inject constructor(batteryTempHistoryRepository: BatteryTempHistoryRepositoryInterface): ViewModel() {
+class BatteryTempGraphViewModel  @Inject constructor(
+    batteryTempHistoryRepository: BatteryTempHistoryRepositoryInterface
+): ViewModel() {
     private val dbDao = batteryTempHistoryRepository.dbDao
     var intervalSize = mutableIntStateOf(60 * 60)
         private set
@@ -164,4 +166,17 @@ class BatteryTempGraphViewModel  @Inject constructor(batteryTempHistoryRepositor
         }
         Log.d("DEBUGGING LOGS", "millis: $millis, selectedDate = ${dateSelected.value}")
     }
+
+
+    val minTemperature = batteryTempHistoryRepository.dbDao.minTemperature().stateIn(
+        viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = Float.POSITIVE_INFINITY
+    )
+
+    val maxTemperature = batteryTempHistoryRepository.dbDao.maxTemperature().stateIn(
+        viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = Float.NEGATIVE_INFINITY
+    )
 }

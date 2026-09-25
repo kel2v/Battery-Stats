@@ -32,6 +32,12 @@ interface TimestampedBatteryTempDao {
         insertAll(newItems)
     }
 
+    @Query("SELECT MIN(temperature) FROM timestampedBatteryTemp")
+    fun minTemperature(): Flow<Float?>
+
+    @Query("SELECT MAX(temperature) FROM timestampedBatteryTemp")
+    fun maxTemperature(): Flow<Float?>
+
     fun getAllByLocalDate(localDate: LocalDate): Flow<List<TimestampedBatteryTemp>> {
         val timestampInterval = StatsTime().localDayToTimestampInterval(localDate)
         return getByTimestampRange(timestampInterval.startTimestamp, timestampInterval.endTimestamp)
