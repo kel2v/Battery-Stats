@@ -1,6 +1,5 @@
 package com.bytemanager.stats.ui.graphs
 
-import android.health.connect.datatypes.units.Temperature
 import android.util.Log
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -9,6 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.bytemanager.stats.R
 import com.bytemanager.stats.data.types.IntervalWiseBatteryTempMinMax
 import com.patrykandpatrick.vico.compose.cartesian.CartesianChartHost
@@ -22,6 +22,8 @@ import com.patrykandpatrick.vico.compose.cartesian.rememberCartesianChart
 import com.patrykandpatrick.vico.compose.cartesian.rememberVicoScrollState
 import kotlin.math.ceil
 import kotlin.math.floor
+import kotlin.math.max
+import kotlin.math.min
 
 @Composable
 fun DayWiseBatteryTempGraph(
@@ -49,8 +51,8 @@ fun DayWiseBatteryTempGraph(
             }
         }
 
-//        val minY = minMaxList.minBy { it.minTemperature }.minTemperature
-//        val maxY = minMaxList.maxBy { it.maxTemperature }.maxTemperature
+        val minY = floor(minTemperature!!/5.0)*5.0
+        val maxY = ceil(maxTemperature!!/5.0)*5.0
 
         CartesianChartHost(
             chart = rememberCartesianChart(
@@ -58,11 +60,13 @@ fun DayWiseBatteryTempGraph(
                     rangeProvider = CartesianLayerRangeProvider.fixed(
                         minX = 0.0,
                         maxX = 24.0,
-                        minY = floor(minTemperature!!) - 3.0,
-                        maxY = ceil(maxTemperature!!) + 3.0
-                    )
+                        minY = minY,
+                        maxY = maxY
+                    ),
                 ),
-                startAxis = VerticalAxis.rememberStart(),
+                startAxis = VerticalAxis.rememberStart(
+                    itemPlacer = VerticalAxis.ItemPlacer.step({5.0})
+                ),
                 endAxis = VerticalAxis.rememberEnd(),
                 bottomAxis = HorizontalAxis.rememberBottom(
                     valueFormatter = {_, value, _ ->
@@ -75,7 +79,8 @@ fun DayWiseBatteryTempGraph(
             ),
             modelProducer = modelProducer,
             scrollState = rememberVicoScrollState(),
-            modifier = Modifier.testTag("graph_img")
+            modifier = Modifier.testTag("graph_img"),
+            chartAreaHeight = min(max((maxY - minY) * 5.0, 200.0), 400.0).dp
         )
     } else {
         Text(
