@@ -21,7 +21,7 @@ class StatsTime(val zoneId: ZoneId = ZoneId.systemDefault()) {
         val month = now.month
         val day = now.dayOfMonth
 
-        return LocalDate.of(year, month+1, day)
+        return LocalDate.of(year, month, day)
     }
 
     fun millisToLocalDate(millis: Long?): LocalDate? {
