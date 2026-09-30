@@ -53,8 +53,7 @@ object StatsNotificationManager {
 
         val notification = NotificationCompat.Builder(appContext, channelId)
             .setSmallIcon(IconCompat.createWithBitmap(textBitmap("${batteryState.temperature.roundToInt()}°")))
-            .setContentTitle("temp: ${batteryState.temperature} Celsius | level = ${batteryState.level}%")
-            .setContentText("voltage: ${batteryState.voltage} V")
+            .setContentTitle("${batteryState.level}% | ${batteryState.temperature} °C | ${batteryState.voltage} V")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .setOngoing(true)
