@@ -67,7 +67,6 @@ fun DayWiseBatteryTempGraph(
                 startAxis = VerticalAxis.rememberStart(
                     itemPlacer = VerticalAxis.ItemPlacer.step({5.0})
                 ),
-                endAxis = VerticalAxis.rememberEnd(),
                 bottomAxis = HorizontalAxis.rememberBottom(
                     valueFormatter = {_, value, _ ->
                         "${value.toInt()}h"
